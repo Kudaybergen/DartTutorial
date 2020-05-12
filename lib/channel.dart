@@ -27,7 +27,10 @@ class HeroesChannel extends ApplicationChannel {
   @override
   Controller get entryPoint {
     final router = Router();
-    router.route('/heroes').link(() => HeroesController());
+    //list of all hero
+//    router.route('/heroes').link(() => HeroesController());
+    //get hero by id
+    router.route('/heroes/[:id]').link(() => HeroesController());
     // Prefer to use `link` instead of `linkFunction`.
     // See: https://aqueduct.io/docs/http/request_controller/
     router.route("/example").linkFunction((request) async {

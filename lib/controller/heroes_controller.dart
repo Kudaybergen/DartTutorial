@@ -12,6 +12,15 @@ class HeroesController extends Controller {
 
   @override
   Future<RequestOrResponse> handle(Request request) async {
+    if (request.path.variables.containsKey('id')) {
+      final id = int.parse(request.path.variables['id']);
+      final hero = _heroes.firstWhere((hero) => hero['id'] == id, orElse: () => null);
+      if (hero == null) {
+        return Response.badRequest();
+      }
+
+      return Response.ok(hero);
+    }
     return Response.ok(_heroes);
   }
 }
